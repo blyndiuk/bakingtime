@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="horizontal"
+android:name="com.example.android.android_me.ui.MainActivity"
+android:baselineAligned="false"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<!--<fragment
+    android:id="@+id/master_list_fragment"
+    android:name="com.example.baking_time.ui.MasterListFragment"
+    android:layout_width="400dp"
+    android:layout_height="match_parent"
+    />-->
+
+    <FrameLayout
+        android:id="@+id/master_list_container"
+        android:layout_width="400dp"
+        android:layout_height="match_parent" />
+
+<View
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"/>
+
+<LinearLayout
+    android:id="@+id/baking_time_linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:id="@+id/video_and_instructions_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>
+
+</LinearLayout>
