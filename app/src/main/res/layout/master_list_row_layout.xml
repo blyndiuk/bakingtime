@@ -6,21 +6,13 @@
 
     <Button
         android:id="@+id/bt_step"
+        style="@style/ButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="30dp"
-        android:paddingTop="5dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="5dp"
         android:gravity="center_vertical"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/button_shape"
-        android:stateListAnimator="@null"
-        android:text="Step 1: Heat the oven."
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@android:color/white"
+        android:paddingStart="30dp"
+        android:paddingEnd="15dp"
+        android:text="@string/button_short_desc_placeholder"
         android:textSize="25sp" />
 
 </LinearLayout>

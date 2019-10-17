@@ -3,12 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     android:orientation="vertical"
     tools:context=".ui.RecipeActivity">
 
     <FrameLayout
         android:id="@+id/video_and_instructions_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="20" />
+
+    <Button
+        android:id="@+id/btn_display_in_widget"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/display_in_widget"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
 </LinearLayout>

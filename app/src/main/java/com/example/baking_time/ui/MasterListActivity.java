@@ -17,41 +17,45 @@ public class MasterListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_master_list);
-        Intent intent = getIntent();
-        if (intent == null) {
-            closeOnError();
-            return;
-        }
 
-        Recipe recipe = intent.getParcelableExtra(Recipe.RECIPE_INTENT);
-        setTitle(recipe.getName());
+        if(savedInstanceState == null) {
 
-        MasterListFragment masterListFragment = new MasterListFragment();
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("i", recipe);
-        masterListFragment.setArguments(bundle);
-        FragmentManager fragmentManagerMl = getSupportFragmentManager();
-        fragmentManagerMl.beginTransaction()
-                .add(R.id.master_list_container, masterListFragment)
-                .commit();
+            Intent intent = getIntent();
+            if (intent == null) {
+                closeOnError();
+                return;
+            }
 
+            Recipe recipe = intent.getParcelableExtra(Recipe.RECIPE_INTENT);
+            setTitle(recipe.getName());
 
-        if (findViewById(R.id.baking_time_linear_layout) != null) {
-            mTwoPane = true;
-            Log.i("LOG", "twopane true");
-            String videoUrl = recipe.getSteps().get(0).getVideoURL();
-
-            RecipeStepFragment recipeStepFragment = new RecipeStepFragment();
-            recipeStepFragment.setDescription("");
-            recipeStepFragment.setVideoUrl(videoUrl);
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .add(R.id.video_and_instructions_container, recipeStepFragment)
+            MasterListFragment masterListFragment = new MasterListFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("i", recipe);
+            masterListFragment.setArguments(bundle);
+            FragmentManager fragmentManagerMl = getSupportFragmentManager();
+            fragmentManagerMl.beginTransaction()
+                    .add(R.id.master_list_container, masterListFragment)
                     .commit();
 
-        } else {
-            mTwoPane = false;
-            Log.i("LOG", "twopane false");
+
+            if (findViewById(R.id.baking_time_linear_layout) != null) {
+                mTwoPane = true;
+                Log.i("LOG", "twopane true");
+                String videoUrl = recipe.getSteps().get(0).getVideoURL();
+
+                RecipeStepFragment recipeStepFragment = new RecipeStepFragment();
+                recipeStepFragment.setDescription("");
+                recipeStepFragment.setVideoUrl(videoUrl);
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .add(R.id.video_and_instructions_container, recipeStepFragment)
+                        .commit();
+
+            } else {
+                mTwoPane = false;
+                Log.i("LOG", "twopane false");
+            }
         }
     }
 

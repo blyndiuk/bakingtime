@@ -20,16 +20,16 @@ public class MasterListFragment extends Fragment {
 
     //   OnTextClickListener mCallBack;
     ArrayList<String> mShortDescriptions;
+    Recipe recipe;
 
     // Mandatory empty constructor
     public MasterListFragment() {
     }
 
-    Recipe recipe;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("MasterListFragment", "in OnCreate");
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             recipe = bundle.getParcelable("i");
@@ -40,7 +40,6 @@ public class MasterListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.i("MasterListFragment ", " here");
         final View rootView = inflater.inflate(R.layout.fragment_master_list, container, false);
 
 

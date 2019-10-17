@@ -23,6 +23,7 @@ import com.google.android.exoplayer2.util.Util;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class RecipeStepFragment extends Fragment {
 
@@ -47,34 +48,39 @@ public class RecipeStepFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_step, container, false);
         TextView textView = rootView.findViewById(R.id.tv_step_description);
+
+        if (savedInstanceState != null) {
+            videoUrl = savedInstanceState.getString("videoUrl");
+            description = savedInstanceState.getString("description");
+
+        }
+
         textView.setText(description);
 
-        uri = createUri(videoUrl);
+        if (videoUrl != null)
+            uri = createUri(videoUrl);
         if (uri == null)
-            Log.i("FLAG", "uri is NULL");
+            Log.i("FRAGMENT", "uri is NULL");
+
         playerView = rootView.findViewById(R.id.pv_player_view);
 
-        // if it's a tablet screen, make the playerView occupy a bigger proportion of the screen
-        if (MasterListActivity.mTwoPane) {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) playerView.getLayoutParams();
-            params.weight = 2.0f;
-            playerView.setLayoutParams(params);
-        }
         return rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (uri != null) {
+        Log.i("FRAGMENT", "in onStart");
+        if (uri != null)
             initializePlayer(uri);
-        } else
+        else
             playerView.setVisibility(View.GONE);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        Log.i("FRAGMENT", "in onStop");
         if (player != null) {
             playerView.setPlayer(null);
             player.release();
@@ -83,16 +89,15 @@ public class RecipeStepFragment extends Fragment {
     }
 
     private Uri createUri(String urlString) {
-        if (urlString.equals(""))
+        if (urlString.equals("")) {
             return null;
+        }
 
         Uri createdUri;
         URL url;
         try {
             url = new URL(urlString);
-            Log.i("FLAG", "new url");
             createdUri = Uri.parse(url.toURI().toString());
-            Log.i("FLAG", "uri");
         } catch (MalformedURLException e1) {
             e1.printStackTrace();
             return null;
@@ -100,6 +105,7 @@ public class RecipeStepFragment extends Fragment {
             e.printStackTrace();
             return null;
         }
+
         return createdUri;
     }
 
@@ -118,5 +124,12 @@ public class RecipeStepFragment extends Fragment {
             player.prepare(mediaSource);
             player.setPlayWhenReady(true);
         }
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle currentState) {
+        currentState.putString("description", description);
+        currentState.putString("videoUrl", videoUrl);
     }
 }

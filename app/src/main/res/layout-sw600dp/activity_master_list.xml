@@ -17,7 +17,8 @@ android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/master_list_container"
-        android:layout_width="400dp"
+        android:layout_width="350dp"
+        android:background="@color/colorAccent"
         android:layout_height="match_parent" />
 
 <View

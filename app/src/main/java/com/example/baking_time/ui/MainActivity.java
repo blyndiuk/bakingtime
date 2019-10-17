@@ -6,10 +6,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.baking_time.R;
 import com.example.baking_time.model.Recipe;
 import com.example.baking_time.utils.JsonPlaceHolderApi;
+import com.example.baking_time.utils.NetworkingUtils;
 
 import java.util.List;
 
@@ -28,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        boolean isConnected = NetworkingUtils.connectedToTheInternet(this);
+
+        if(isConnected)
+            setUI(isConnected);
+        else {
+            setUI(isConnected);
+            return;
+        }
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -51,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
                 mRecyclerView = findViewById(R.id.rv_main_activity);
                 Context context = getApplicationContext();
                 MainActivityRecyclerViewAdapter reviewsAdapter = new MainActivityRecyclerViewAdapter(recipes, context);
-               // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-               // mRecyclerView.setLayoutManager(linearLayoutManager);
                 mRecyclerView.setAdapter(reviewsAdapter);
 
             }
@@ -63,5 +76,23 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("LOG failure", t.getMessage());
             }
         });
+    }
+
+    private void setUI(boolean isConnected) {
+        LinearLayout mainLayout = findViewById(R.id.ll_main_layout);
+        RecyclerView recyclerView = findViewById(R.id.rv_main_activity);
+        if(!isConnected) {
+            recyclerView.setVisibility(View.GONE);
+            TextView textView = new TextView(this);
+            textView.setText("No Internet Connection");
+            textView.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            textView.setGravity(Gravity.CENTER);
+            mainLayout.addView(textView);
+        }
+        else {
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 }
