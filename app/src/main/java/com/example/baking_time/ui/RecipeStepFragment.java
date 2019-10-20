@@ -8,9 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.baking_time.Constants;
 import com.example.baking_time.R;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -23,7 +23,6 @@ import com.google.android.exoplayer2.util.Util;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class RecipeStepFragment extends Fragment {
 
@@ -44,15 +43,15 @@ public class RecipeStepFragment extends Fragment {
         this.description = description;
     }
 
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_step, container, false);
         TextView textView = rootView.findViewById(R.id.tv_step_description);
 
         if (savedInstanceState != null) {
-            videoUrl = savedInstanceState.getString("videoUrl");
-            description = savedInstanceState.getString("description");
-
+            videoUrl = savedInstanceState.getString(Constants.KEY_VIDEO_URL);
+            description = savedInstanceState.getString(Constants.KEY_DESCRIPTION);
         }
 
         textView.setText(description);
@@ -105,7 +104,6 @@ public class RecipeStepFragment extends Fragment {
             e.printStackTrace();
             return null;
         }
-
         return createdUri;
     }
 
@@ -116,20 +114,23 @@ public class RecipeStepFragment extends Fragment {
                     new DefaultTrackSelector());
             playerView.setPlayer(player);
 
-            DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getActivity(),
-                    Util.getUserAgent(getActivity(), "baking_time"));
-            ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory)
-                    .createMediaSource(mediaUri);
+            if (getActivity() != null) {
+                DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getActivity(),
+                        Util.getUserAgent(getActivity(), "baking_time"));
+                ExtractorMediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory)
+                        .createMediaSource(mediaUri);
 
-            player.prepare(mediaSource);
-            player.setPlayWhenReady(true);
+                player.prepare(mediaSource);
+                player.setPlayWhenReady(true);
+            }
         }
     }
 
 
     @Override
-    public void onSaveInstanceState(Bundle currentState) {
-        currentState.putString("description", description);
-        currentState.putString("videoUrl", videoUrl);
+    public void onSaveInstanceState(@NonNull Bundle currentState) {
+        currentState.putString(Constants.KEY_DESCRIPTION, description);
+        currentState.putString(Constants.KEY_VIDEO_URL, videoUrl);
     }
+
 }

@@ -6,4 +6,12 @@
     <string name="display_in_widget">Display in widget</string>
     <string name="step_desc_placeholder">This view is for the step description</string>
     <string name="button_short_desc_placeholder">Step 1: Heat the oven.</string>
+    <string name="button_recipe_placeholder">Apple Pie</string>
+    <string name="no_connection">No Internet Connection</string>
+    <string name="previous">‹‹‹ Previous</string>
+    <string name="next">Next ›››</string>
+    <string name="previousLand">‹\n‹\n‹</string>
+    <string name="nextLand">›\n›\n›</string>
+    <string name="pause_video">pause video</string>
+    <string name="play_video">play video</string>
 </resources>

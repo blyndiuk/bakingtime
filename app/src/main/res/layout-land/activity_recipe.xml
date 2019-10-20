@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="horizontal"
+    tools:context=".ui.RecipeActivity">
+
+    <Button
+        android:id="@+id/btn_previous"
+        style="@style/ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="0dp"
+        android:layout_weight="1"
+        android:text="@string/previousLand" />
+
+    <FrameLayout
+        android:id="@+id/video_and_instructions_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="20" />
+
+    <Button
+        android:id="@+id/btn_next"
+        style="@style/ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="0dp"
+        android:layout_weight="1"
+        android:text="@string/nextLand" />
+</LinearLayout>

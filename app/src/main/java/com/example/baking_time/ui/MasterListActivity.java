@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.baking_time.Constants;
 import com.example.baking_time.R;
 import com.example.baking_time.model.Recipe;
+
 
 public class MasterListActivity extends AppCompatActivity {
     public static boolean mTwoPane;
@@ -18,15 +20,14 @@ public class MasterListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_master_list);
 
-        if(savedInstanceState == null) {
-
+        if (savedInstanceState == null) {
             Intent intent = getIntent();
             if (intent == null) {
                 closeOnError();
                 return;
             }
 
-            Recipe recipe = intent.getParcelableExtra(Recipe.RECIPE_INTENT);
+            Recipe recipe = intent.getParcelableExtra(Constants.RECIPE_INTENT);
             setTitle(recipe.getName());
 
             MasterListFragment masterListFragment = new MasterListFragment();
@@ -41,7 +42,6 @@ public class MasterListActivity extends AppCompatActivity {
 
             if (findViewById(R.id.baking_time_linear_layout) != null) {
                 mTwoPane = true;
-                Log.i("LOG", "twopane true");
                 String videoUrl = recipe.getSteps().get(0).getVideoURL();
 
                 RecipeStepFragment recipeStepFragment = new RecipeStepFragment();
@@ -54,7 +54,6 @@ public class MasterListActivity extends AppCompatActivity {
 
             } else {
                 mTwoPane = false;
-                Log.i("LOG", "twopane false");
             }
         }
     }

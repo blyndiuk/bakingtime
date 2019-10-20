@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
-import com.example.baking_time.R;
 import com.example.baking_time.ui.MainActivity;
 
 /**

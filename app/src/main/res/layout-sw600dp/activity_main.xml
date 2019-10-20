@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorAccent"
+    android:background="@color/colorBackground"
     tools:context=".ui.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_main_activity"
-        app:layoutManager="android.support.v7.widget.GridLayoutManager"
-        app:spanCount="2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:spanCount="2" />
 
 </LinearLayout>

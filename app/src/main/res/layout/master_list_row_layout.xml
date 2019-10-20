@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:background="@color/colorAccent">
+    android:layout_height="75dp"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/bt_step"
-        style="@style/ButtonStyle"
+    <TextView
+        android:id="@+id/tv_step"
+        style="@style/DarkText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="73dp"
+        android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
-        android:paddingStart="30dp"
-        android:paddingEnd="15dp"
+        android:paddingStart="20dp"
         android:text="@string/button_short_desc_placeholder"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimary"
+        tools:ignore="ContentDescription" />
 
 </LinearLayout>
