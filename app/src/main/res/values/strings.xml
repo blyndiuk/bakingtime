@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">BakingTime</string>
 
     <string name="appwidget_text">Add your recipe here</string>
@@ -14,4 +15,7 @@
     <string name="nextLand">›\n›\n›</string>
     <string name="pause_video">pause video</string>
     <string name="play_video">play video</string>
+    <string name="no_description">description not available</string>
+
+
 </resources>

@@ -54,12 +54,13 @@ public class RecipeStepFragment extends Fragment {
             description = savedInstanceState.getString(Constants.KEY_DESCRIPTION);
         }
 
-        textView.setText(description);
+        if (description != null)
+            textView.setText(description);
+        else
+            textView.setText(getString(R.string.no_description));
 
         if (videoUrl != null)
             uri = createUri(videoUrl);
-        if (uri == null)
-            Log.i("FRAGMENT", "uri is NULL");
 
         playerView = rootView.findViewById(R.id.pv_player_view);
 
