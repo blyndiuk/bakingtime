@@ -1,8 +1,6 @@
 
 package com.example.baking_time;
 
-import android.support.test.espresso.ViewAssertion;
-import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;

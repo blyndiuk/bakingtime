@@ -8,7 +8,7 @@
         android:id="@+id/bt_recipe_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Apple Pie"
+        android:text="@string/button_recipe_placeholder"
         style="@style/ButtonStyle"
         android:textSize="36sp" />
 

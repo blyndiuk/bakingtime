@@ -14,6 +14,7 @@
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:text="@string/button_short_desc_placeholder"
         android:textSize="20sp" />
 

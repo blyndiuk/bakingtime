@@ -3,7 +3,6 @@
     <string name="app_name">BakingTime</string>
 
     <string name="appwidget_text">Add your recipe here</string>
-    <string name="add_widget">Add widget</string>
     <string name="display_in_widget">Display in widget</string>
     <string name="step_desc_placeholder">This view is for the step description</string>
     <string name="button_short_desc_placeholder">Step 1: Heat the oven.</string>

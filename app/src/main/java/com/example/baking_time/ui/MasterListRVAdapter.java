@@ -91,7 +91,6 @@ public class MasterListRVAdapter extends RecyclerView.Adapter<MasterListRVAdapte
 
     @Override
     public int getItemCount() {
-        //adding one because we need to desplay all the steps + ingredients
         return recipe.getSteps().size();
     }
 }
