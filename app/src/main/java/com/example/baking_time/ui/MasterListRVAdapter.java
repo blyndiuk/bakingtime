@@ -51,7 +51,8 @@ public class MasterListRVAdapter extends RecyclerView.Adapter<MasterListRVAdapte
             myViewHolder.textView.setText(shortDesc);
             myViewHolder.textView.setTypeface(Typeface.DEFAULT_BOLD);
         } else {
-            myViewHolder.textView.setText("Step " + (position) + ": " + shortDesc);
+            String text = context.getResources().getString(R.string.step) + " " + (position) + ": " + shortDesc;
+            myViewHolder.textView.setText(text);
             myViewHolder.textView.setTypeface(Typeface.DEFAULT);
         }
 
