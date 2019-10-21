@@ -31,6 +31,8 @@ public class RecipeStepFragment extends Fragment {
     private PlayerView playerView;
     private SimpleExoPlayer player;
     private Uri uri;
+    private long positionInPlayer = -1;
+    boolean playWhenReady = true;
 
     public RecipeStepFragment() {
     }
@@ -52,6 +54,8 @@ public class RecipeStepFragment extends Fragment {
         if (savedInstanceState != null) {
             videoUrl = savedInstanceState.getString(Constants.KEY_VIDEO_URL);
             description = savedInstanceState.getString(Constants.KEY_DESCRIPTION);
+            positionInPlayer = savedInstanceState.getLong(Constants.PLAYBACK_POSITION);
+            playWhenReady = savedInstanceState.getBoolean(Constants.PLAY_WHEN_READY);
         }
 
         if (description != null)
@@ -59,8 +63,10 @@ public class RecipeStepFragment extends Fragment {
         else
             textView.setText(getString(R.string.no_description));
 
+
         if (videoUrl != null)
             uri = createUri(videoUrl);
+
 
         playerView = rootView.findViewById(R.id.pv_player_view);
 
@@ -70,23 +76,49 @@ public class RecipeStepFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.i("FRAGMENT", "in onStart");
-        if (uri != null)
-            initializePlayer(uri);
-        else
-            playerView.setVisibility(View.GONE);
+        if (Util.SDK_INT > 23) {
+            if (uri != null)
+                initializePlayer(uri);
+            else
+                playerView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if ((Util.SDK_INT <= 23 || player == null)) {
+            if (uri != null)
+                initializePlayer(uri);
+            else
+                playerView.setVisibility(View.GONE);
+        }
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (Util.SDK_INT <= 23) {
+            if (player != null) {
+                releasePlayer();
+                player = null;
+            }
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.i("FRAGMENT", "in onStop");
-        if (player != null) {
-            playerView.setPlayer(null);
-            player.release();
-            player = null;
+        if (Util.SDK_INT > 23) {
+            Log.i("FRAGMENT", "in onStop");
+            if (player != null) {
+                releasePlayer();
+                player = null;
+            }
         }
     }
+
 
     private Uri createUri(String urlString) {
         if (urlString.equals("")) {
@@ -122,16 +154,29 @@ public class RecipeStepFragment extends Fragment {
                         .createMediaSource(mediaUri);
 
                 player.prepare(mediaSource);
-                player.setPlayWhenReady(true);
+                if (positionInPlayer != -1) {
+                    player.seekTo(positionInPlayer);
+                }
+                player.setPlayWhenReady(playWhenReady);
             }
         }
     }
+
+    private void releasePlayer() {
+        positionInPlayer = player.getCurrentPosition();
+        playWhenReady = player.getPlayWhenReady();
+        player.stop();
+        player.release();
+        player = null;
+    }
+
 
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle currentState) {
         currentState.putString(Constants.KEY_DESCRIPTION, description);
         currentState.putString(Constants.KEY_VIDEO_URL, videoUrl);
+        currentState.putLong(Constants.PLAYBACK_POSITION, positionInPlayer);
+        currentState.putBoolean(Constants.PLAY_WHEN_READY, playWhenReady);
     }
-
 }

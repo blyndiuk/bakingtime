@@ -12,6 +12,8 @@ public class Constants {
     public static final String KEY_POSITION = "position_key";
     public static final String POSITION_INTENT= "position_intent";
     public final static String RECIPE_INTENT = "recipe_intent";
+    public final static String PLAYBACK_POSITION = "video_position";
+    public final static String PLAY_WHEN_READY = "play_when_ready";
 
     private Constants(){}
 }
